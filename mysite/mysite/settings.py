@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for mysite project.
 
@@ -37,6 +38,7 @@ INSTALLED_APPS = (
     #'django.contrib.messages',
     'django.contrib.staticfiles',
     'test',
+    'test2',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -85,4 +87,9 @@ STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
+)
+
+#访问静态文件配置（debug=true）
+STATICFILES_DIRS = (
+    os.path.join(os.path.dirname(__file__),"static").replace('\\','/'),
 )
