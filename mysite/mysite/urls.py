@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     #url(r'^admin/', include(admin.site.urls)),
     url(r'^test/',include('test.urls')),
     url(r'^test2/', include('test2.urls')),
+    url(r'^auth', include('auth.urls')),
 )
 
 #访问静态文件配置（debug=true）
