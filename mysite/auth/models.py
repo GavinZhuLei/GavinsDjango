@@ -16,4 +16,4 @@ class Group(models.Model):
 
 class Permission(models.Model):
     name = models.CharField(max_length=200)
-    ation = models.CharField(max_length=200)
+    action = models.CharField(max_length=200)

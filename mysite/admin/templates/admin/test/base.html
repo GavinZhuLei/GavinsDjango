@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="block1">
+    {% block block1 %}
+
+        {% test = "测试传递变量" %}
+        {% include "admin/test/include.html" %}
+        <span>父模板自己block1</span>
+    {% endblock %}
+</div>
+<div id="content">
+
+    {% block content %}
+        <span>父模板自己</span>
+    {% endblock %}
+</div>
+</body>
+</html>
