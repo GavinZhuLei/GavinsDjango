@@ -12,6 +12,10 @@ urlpatterns = patterns('',
     url(r'^test/',include('test.urls')),
     url(r'^test2/', include('test2.urls')),
     url(r'^auth', include('auth.urls')),
+
+    url(r'^admin/index$', 'admin.login.index'),
+    url(r'^admin/login$', 'admin.login.login'),
+    url(r'^admin/test', 'admin.login.test'),
 )
 
 #访问静态文件配置（debug=true）
