@@ -46,7 +46,7 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -97,4 +97,8 @@ TEMPLATE_DIRS = (
 #访问静态文件配置（debug=true）
 STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__),"static").replace('\\','/'),
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'admin.home.myprocessor',
 )

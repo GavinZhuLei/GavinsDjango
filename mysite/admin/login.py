@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 #__author__ = 'Gavin'
 from django.shortcuts import render_to_response
-
-def index(request):
-    return render_to_response('admin/login/index.html',{})
+from django.http import HttpResponseRedirect,HttpResponse
 
 
 def login(request):
-    return render_to_response('admin/login/login_success.html',{})
-
-def test(request):
-    return render_to_response('admin/test/test.html',{})
+    if request.method == 'POST':
+        return HttpResponseRedirect('/admin/index/')
+        # return HttpResponse('ok')
+    else:
+        return render_to_response('admin/login/index.html',{})

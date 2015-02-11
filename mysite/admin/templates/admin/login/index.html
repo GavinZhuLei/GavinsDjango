@@ -1,55 +1,85 @@
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>Signin Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/static/admin/bootcss/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-
-    <div class="container">
-
-      <form class="form-signin" action="/admin/login">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-
-    </div> <!-- /container -->
-
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+	<meta charset="utf-8" />
+	<title>Metronic | Login Page</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+	<link href="/static/admin/metronic/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/static/admin/metronic/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/static/admin/metronic/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/static/admin/metronic/css/style-metro.css" rel="stylesheet" type="text/css"/>
+	<link href="/static/admin/metronic/css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="/static/admin/metronic/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="/static/admin/metronic/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="/static/admin/metronic/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<!-- END GLOBAL MANDATORY STYLES -->
+	<!-- BEGIN PAGE LEVEL STYLES -->
+	<link href="/static/admin/metronic/css/login.css" rel="stylesheet" type="text/css"/>
+	<!-- END PAGE LEVEL STYLES -->
+	<link rel="shortcut icon" href="/static/admin/metronic/image/favicon.ico" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="login">
+	<!-- BEGIN LOGO -->
+	<div class="logo">
+		<img src="/static/admin/metronic/image/logo-big.png" alt="" /> 
+	</div>
+	<!-- END LOGO -->
+	<!-- BEGIN LOGIN -->
+	<div class="content">
+		<!-- BEGIN LOGIN FORM -->
+        {% include 'admin/login/login.html' %}
+		<!-- END LOGIN FORM -->
+		<!-- BEGIN FORGOT PASSWORD FORM -->
+        {% include 'admin/login/forget.html' %}
+		<!-- END FORGOT PASSWORD FORM -->
+		<!-- BEGIN REGISTRATION FORM -->
+        {% include 'admin/login/register.html' %}
+		<!-- END REGISTRATION FORM -->
+	</div>
+	<!-- END LOGIN -->
+	<!-- BEGIN COPYRIGHT -->
+	<div class="copyright">
+		2013 &copy; Metronic. Admin Dashboard Template.
+	</div>
+	<!-- END COPYRIGHT -->
+	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+	<!-- BEGIN CORE PLUGINS -->
+	<script src="/static/admin/metronic/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="/static/admin/metronic/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+	<script src="/static/admin/metronic/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+	<script src="/static/admin/metronic/js/bootstrap.min.js" type="text/javascript"></script>
+	<!--[if lt IE 9]>
+	<script src="media/js/excanvas.min.js"></script>
+	<script src="media/js/respond.min.js"></script>  
+	<![endif]-->   
+	<script src="/static/admin/metronic/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="/static/admin/metronic/js/jquery.blockui.min.js" type="text/javascript"></script>  
+	<script src="/static/admin/metronic/js/jquery.cookie.min.js" type="text/javascript"></script>
+	<script src="/static/admin/metronic/js/jquery.uniform.min.js" type="text/javascript" ></script>
+	<!-- END CORE PLUGINS -->
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script src="/static/admin/metronic/js/jquery.validate.min.js" type="text/javascript"></script>
+	<!-- END PAGE LEVEL PLUGINS -->
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script src="/static/admin/metronic/js/app.js" type="text/javascript"></script>
+{#	<script src="/static/admin/metronic/js/login.js" type="text/javascript"></script>      #}
+	<!-- END PAGE LEVEL SCRIPTS --> 
+	<script>
+		jQuery(document).ready(function() {     
+		  App.init();
+		  Login.init();
+		});
+	</script>
+	<!-- END JAVASCRIPTS -->
+<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
+<!-- END BODY -->
 </html>
