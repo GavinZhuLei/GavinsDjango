@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import get_template
+from gauth.userManager import UserManager
+from gauth.models import User
+import datetime
 
 
 def get_username():
@@ -21,3 +24,29 @@ def index(request):
 
     return render_to_response('admin/home/index.html', {},
                               context_instance=RequestContext(request, [myprocessor]))
+
+
+def test(request):
+    usermanager = UserManager()
+
+    users = usermanager.get_all
+    # users = User.objects.all()
+
+    return render_to_response('admin/home/test.html', {'users': users})
+
+
+def test1(request):
+    usermanager = UserManager()
+    user = User()
+    user.password = '123456'
+    user.create_time = datetime.datetime.now()
+    user.last_login_time = datetime.datetime.now()
+    user.username = 'zhulei'
+    usermanager.add(user)
+    return HttpResponse('success')
+
+def test2(request):
+    usermanager = UserManager()
+    user = usermanager.get_one('zhulei')
+
+    return render_to_response('admin/home/test2.html',{'user':user})
