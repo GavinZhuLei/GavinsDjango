@@ -44,10 +44,10 @@ def test(request):
 def test1(request):
     usermanager = UserManager()
     user = User()
-    user.password = 'zhulei'
+    user.password = '123456'
     user.create_time = datetime.datetime.now()
     user.last_login_time = datetime.datetime.now()
-    user.username = 'zhulei2'
+    user.username = 'zhulei'
     if usermanager.add(user):
         return HttpResponse('success')
     return HttpResponse('fail')

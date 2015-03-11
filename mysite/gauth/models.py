@@ -2,14 +2,18 @@
 # __author__ = '磊'
 
 from django.db import models
+import datetime
 
 
 class User(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=200)
-    create_time = models.DateTimeField()
-    last_login_time = models.DateTimeField()
-    # groups = models.ManyToManyField(Group)
+    nickname = models.CharField(max_length=10)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    create_time = models.DateTimeField(default=datetime.datetime.now())
+    last_login_time = models.DateTimeField(null=True)
+    is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.username
@@ -18,19 +22,30 @@ class User(models.Model):
         return True
 
 
+class PermissionGroup(models.Model):
+    name = models.CharField(max_length=200)
+    module = models.CharField(max_length=50)
 
-# class Group(models.Model):
-#     name = models.CharField(max_length=50)
-#     create_time = models.DateTimeField()
-#     users = models.ManyToManyField(User)
-#
-#     def __unicode__(self):
-#         return self.name
-#
-#
-# class Permission(models.Model):
-#     name = models.CharField(max_length=200)
-#     action = models.CharField(max_length=200)
-#
-#     def __unicode__(self):
-#         return self.name
+    def __unicode__(self):
+        return self.name
+
+
+class Permission(models.Model):
+    name = models.CharField(max_length=200)
+    action = models.CharField(max_length=200)
+    action_group = models.ForeignKey(PermissionGroup)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Group(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=255)
+    create_username = models.CharField(max_length=50)
+    create_time = models.DateTimeField(default=datetime.datetime.now())
+    users = models.ManyToManyField(User)
+    permission = models.ManyToManyField(Permission)
+
+    def __unicode__(self):
+        return self.name
