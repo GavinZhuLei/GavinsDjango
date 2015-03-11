@@ -38,11 +38,12 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
+    <div>{{ pk }}</div>
+    <div>{{ request.user }}</div>
 	<!-- BEGIN HEADER -->
     {% include 'admin/home/top.html' %}
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">

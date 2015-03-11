@@ -32,9 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     #'django.contrib.admin',
-    #'django.contrib.auth',
+    # 'django.contrib.auth',
     #'django.contrib.contenttypes',
-    #'django.contrib.sessions',
+    'django.contrib.sessions',
     #'django.contrib.messages',
     'django.contrib.staticfiles',
     'test',
@@ -101,5 +101,6 @@ STATICFILES_DIRS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'admin.home.myprocessor',
+    # 'admin.home.myprocessor',
+    'django.core.context_processors.request',
 )

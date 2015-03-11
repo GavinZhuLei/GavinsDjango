@@ -14,6 +14,9 @@ class User(models.Model):
     def __unicode__(self):
         return self.username
 
+    def is_authenticated(self):
+        return True
+
 
 
 # class Group(models.Model):

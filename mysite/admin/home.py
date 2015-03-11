@@ -7,6 +7,7 @@ from django.template.loader import get_template
 from gauth.userManager import UserManager
 from gauth.models import User
 import datetime
+import gauth
 
 
 def get_username():
@@ -22,9 +23,14 @@ def index(request):
     # t = get_template('admin/home/index.html')
     # return HttpResponse(t.render(c))
 
-    return render_to_response('admin/home/index.html', {},
-                              context_instance=RequestContext(request, [myprocessor]))
+    # return render_to_response('admin/home/index.html', {},
+    #                           context_instance=RequestContext(request, [myprocessor]))
 
+    pk = gauth.get_userpk(request)
+    user = gauth.get_user(request)
+    request.user = user
+    return render_to_response('admin/home/index.html', {'pk':pk,'user':user},
+                              context_instance = RequestContext(request))
 
 def test(request):
     usermanager = UserManager()
@@ -38,12 +44,13 @@ def test(request):
 def test1(request):
     usermanager = UserManager()
     user = User()
-    user.password = '123456'
+    user.password = 'zhulei'
     user.create_time = datetime.datetime.now()
     user.last_login_time = datetime.datetime.now()
-    user.username = 'zhulei'
-    usermanager.add(user)
-    return HttpResponse('success')
+    user.username = 'zhulei2'
+    if usermanager.add(user):
+        return HttpResponse('success')
+    return HttpResponse('fail')
 
 def test2(request):
     usermanager = UserManager()
