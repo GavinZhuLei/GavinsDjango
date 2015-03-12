@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import get_template
 from gauth.userManager import UserManager
+from gauth.permissionManager import PermissionManager
 from gauth.models import User
 import datetime
 import gauth
@@ -38,7 +39,10 @@ def test(request):
     users = usermanager.get_all
     # users = User.objects.all()
 
-    return render_to_response('admin/home/test.html', {'users': users})
+    permissionmanager = PermissionManager()
+    actions = permissionmanager.get_all()
+    
+    return render_to_response('admin/home/test.html', {'users': users,'actions':actions})
 
 
 def test1(request):

@@ -8,5 +8,11 @@
 {% for user in users %}
 <div>{{ user.username }}  {{ user.password }}</div>
 {% endfor %}
+
+<div>
+    {% for action in actions %}
+        <div>{{ action.action_group.module }}</div>
+    {% endfor %}
+</div>
 </body>
 </html>
