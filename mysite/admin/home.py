@@ -7,8 +7,10 @@ from django.template.loader import get_template
 from gauth.userManager import UserManager
 from gauth.permissionManager import PermissionManager
 from gauth.models import User
+from gauth.decorators import login_required
 import datetime
 import gauth
+from django.contrib.auth import decorators
 
 
 def get_username():
@@ -33,6 +35,8 @@ def index(request):
     return render_to_response('admin/home/index.html', {'pk':pk,'user':user},
                               context_instance = RequestContext(request))
 
+
+@login_required
 def test(request):
     usermanager = UserManager()
 
