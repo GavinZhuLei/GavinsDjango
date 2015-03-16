@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^home/test$', 'admin.home.test'),
     url(r'^home/test1$', 'admin.home.test1'),
     url(r'^home/test2$', 'admin.home.test2'),
+    url(r'^login/test$','admin.login.test'),
 )
