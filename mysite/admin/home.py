@@ -29,10 +29,9 @@ def index(request):
     # return render_to_response('admin/home/index.html', {},
     #                           context_instance=RequestContext(request, [myprocessor]))
 
-    pk = gauth.get_userpk(request)
-    user = gauth.get_user(request)
-    request.user = user
-    return render_to_response('admin/home/index.html', {'pk':pk,'user':user},
+    # 加载菜单
+
+    return render_to_response('admin/home/layout.html', {},
                               context_instance = RequestContext(request))
 
 

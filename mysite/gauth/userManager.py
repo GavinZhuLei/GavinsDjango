@@ -6,7 +6,7 @@ import common
 
 from django.contrib.auth import authenticate
 
-class UserManager():
+class UserManager(object):
     def __init__(self):
         pass
 

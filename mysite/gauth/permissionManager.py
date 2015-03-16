@@ -3,7 +3,7 @@
 from gauth.models import Permission
 
 
-class PermissionManager():
+class PermissionManager(object):
     def __init__(self):
         pass
 

@@ -49,3 +49,15 @@ class Group(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class AnonymousUser(object):
+    id = None
+    pk = None
+    username = ''
+
+    def __init__(self):
+        pass
+
+    def is_authenticated(self):
+        return False
