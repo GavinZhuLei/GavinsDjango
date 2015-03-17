@@ -154,41 +154,40 @@ var Login = function() {
             ignore: "",
             rules: {
 
-                fullname: {
+                username: {
                     required: true
                 },
                 email: {
                     required: true,
                     email: true
                 },
-                address: {
-                    required: true
-                },
-                city: {
-                    required: true
-                },
-                country: {
-                    required: true
-                },
-
-                username: {
+                phone: {
                     required: true
                 },
                 password: {
                     required: true
                 },
-                rpassword: {
+                repassword: {
                     equalTo: "#register_password"
                 },
-
-                tnc: {
-                    required: true
-                }
             },
 
             messages: { // custom messages for radio buttons and checkboxes
-                tnc: {
-                    required: "Please accept TNC first."
+                username:{
+                    required: "用户名是必须填写的"
+                },
+                email:{
+                    required: "邮箱是必须填写的",
+                    email: "邮箱格式不正确"
+                },
+                phone:{
+                    required: "手机号码是必须填写的"
+                },
+                password:{
+                    required: "密码是必须填写的"
+                },
+                repassword:{
+                    equalTo: "输入的密码不相同"
                 }
             },
 

@@ -10,3 +10,14 @@ class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField()
     remember = forms.BooleanField(required=False)
+
+
+class RegisterForm(forms.Form):
+    """
+    用户注册
+    """
+    username = forms.CharField()
+    password = forms.CharField()
+    repassword = forms.CharField()
+    email = forms.EmailField()
+    phone = forms.CharField()
