@@ -24,7 +24,7 @@ def login(request):
             auuser = usermanager.authenticate(username,password)
             if auuser is not None:
                 gauth.login(request,auuser)
-                return HttpResponseRedirect('/admin/index')
+                return HttpResponseRedirect('/admin/index/')
         return HttpResponse('fail')
 
     else:
@@ -53,7 +53,7 @@ def register(request):
 
 def logout(request):
     gauth.logout(request)
-    return HttpResponseRedirect('/admin/login')
+    return HttpResponseRedirect('/admin/login/')
 
 def test(request):
     from forms import LoginForm
