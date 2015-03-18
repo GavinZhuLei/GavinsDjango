@@ -45,12 +45,12 @@ var Datatable = function() {
                     "pageLength": 10, // default records per page
                     "language": { // language settings
                         // metronic spesific
-                        "metronicGroupActions": "_TOTAL_ records selected:  ",
-                        "metronicAjaxRequestGeneralError": "Could not complete request. Please check your internet connection",
+                        "metronicGroupActions": "_TOTAL_ 条记录被选中：  ",
+                        "metronicAjaxRequestGeneralError": "无法完成您的请求，请检查您的网络连接",
 
                         // data tables spesific
-                        "lengthMenu": "<span class='seperator'>|</span>View _MENU_ records",
-                        "info": "<span class='seperator'>|</span>Found total _TOTAL_ records",
+                        "lengthMenu": "<span class='seperator'>|</span>每页 _MENU_ 条",
+                        "info": "<span class='seperator'>|</span>共 _TOTAL_ 条记录",
                         "infoEmpty": "No records found to show",
                         "emptyTable": "No data available in table",
                         "zeroRecords": "No matching records found",
@@ -80,9 +80,12 @@ var Datatable = function() {
                         "type": "POST", // request type
                         "timeout": 20000,
                         "data": function(data) { // add request parameters before submit
+                            console.log(data)
+
                             $.each(ajaxParams, function(key, value) {
                                 data[key] = value;
                             });
+
                             Metronic.blockUI({
                                 message: tableOptions.loadingMessage,
                                 target: tableContainer,
@@ -92,6 +95,8 @@ var Datatable = function() {
                             });
                         },
                         "dataSrc": function(res) { // Manipulate the data returned from the server
+                            console.log(res)
+
                             if (res.customActionMessage) {
                                 Metronic.alert({
                                     type: (res.customActionStatus == 'OK' ? 'success' : 'danger'),
@@ -101,7 +106,6 @@ var Datatable = function() {
                                     place: 'prepend'
                                 });
                             }
-
                             if (res.customActionStatus) {
                                 if (tableOptions.resetGroupActionInputOnSuccess) {
                                     $('.table-group-action-input', tableWrapper).val("");
@@ -122,6 +126,8 @@ var Datatable = function() {
                             return res.data;
                         },
                         "error": function() { // handle general connection errors
+                            console.log("error")
+
                             if (tableOptions.onError) {
                                 tableOptions.onError.call(undefined, the);
                             }
@@ -139,6 +145,7 @@ var Datatable = function() {
                     },
 
                     "drawCallback": function(oSettings) { // run some code on table redraw
+
                         if (tableInitialized === false) { // check if table has been initialized
                             tableInitialized = true; // set table initialized
                             table.show(); // display table

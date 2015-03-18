@@ -1,4 +1,7 @@
-var TableAjax = function () {
+/**
+ * Created by 磊 on 2015/3/18.
+ */
+var UserTableAjax = function () {
 
     var initPickers = function () {
         //init date pickers
@@ -27,13 +30,13 @@ var TableAjax = function () {
                 console.log("load")
             },
             loadingMessage: 'Loading...',
-            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options
 
                 // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
-                // So when dropdowns used the scrollable div should be removed. 
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js).
+                // So when dropdowns used the scrollable div should be removed.
                 //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
-                
+
                 "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
 
                 "lengthMenu": [
@@ -42,7 +45,7 @@ var TableAjax = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "/admin/test/ajax_data/", // ajax source
+                    "url": "/admin/user/data/", // ajax source
                 },
                 "order": [
                     [1, "asc"]
@@ -65,7 +68,7 @@ var TableAjax = function () {
                 Metronic.alert({
                     type: 'danger',
                     icon: 'warning',
-                    message: 'Please select an action',
+                    message: '请选择一个操作',
                     container: grid.getTableWrapper(),
                     place: 'prepend'
                 });
@@ -73,7 +76,7 @@ var TableAjax = function () {
                 Metronic.alert({
                     type: 'danger',
                     icon: 'warning',
-                    message: 'No record selected',
+                    message: '没有选中的记录',
                     container: grid.getTableWrapper(),
                     place: 'prepend'
                 });

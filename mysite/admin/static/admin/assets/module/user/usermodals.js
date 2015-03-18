@@ -1,12 +1,15 @@
-var UIExtendedModals = function () {
+/**
+ * Created by 磊 on 2015/3/18.
+ */
+var UserUIExtendedModals = function () {
 
-    
+
     return {
         //main function to initiate the module
         init: function () {
-        
+
             // general settings
-            $.fn.modal.defaults.spinner = $.fn.modalmanager.defaults.spinner = 
+            $.fn.modal.defaults.spinner = $.fn.modalmanager.defaults.spinner =
               '<div class="loading-spinner" style="width: 200px; margin-left: -100px;">' +
                 '<div class="progress progress-striped active">' +
                   '<div class="progress-bar" style="width: 100%;"></div>' +
@@ -22,7 +25,7 @@ var UIExtendedModals = function () {
                 '<div class="modal hide fade" tabindex="-1">',
                   '<div class="modal-header">',
                     '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>',
-                    '<h4 class="modal-title">Modal header</h4>', 
+                    '<h4 class="modal-title">Modal header</h4>',
                   '</div>',
                   '<div class="modal-body">',
                     '<p>Test</p>',
@@ -33,14 +36,15 @@ var UIExtendedModals = function () {
                   '</div>',
                 '</div>'
               ].join('');
-              
+
               $(tmpl).modal();
             });
 
             //ajax demo:
-            var $modal = $('#ajax-modal');
+            var $modal = $('#user-edit-modal');
 
-            $('#ajax-demo').on('click', function(){
+            $('#j-adduser').on('click', function(){
+                console.log($modal)
               // create the backdrop and wait for next modal to be triggered
               $('body').modalmanager('loading');
 
@@ -48,7 +52,7 @@ var UIExtendedModals = function () {
                   $modal.load('/admin/user/edit/', '', function(){
                   $modal.modal();
                 });
-              }, 1000);
+              }, 500);
             });
 
             $modal.on('click', '.update', function(){

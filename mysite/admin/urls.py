@@ -11,10 +11,16 @@ urlpatterns = patterns('',
     url(r'^register/$','admin.login.register'),
     url(r'^logout/$', 'admin.login.logout'),
 
+    # user
+    url(r'^user/index/$','admin.user.index'),
+    url(r'^user/data/$', 'admin.user.users_data'),
+    url(r'^user/edit/$', 'admin.user.edit'),
+
     url(r'^home/test$', 'admin.home.test'),
     url(r'^home/test1$', 'admin.home.test1'),
     url(r'^home/test2$', 'admin.home.test2'),
     url(r'^login/test$','admin.login.test'),
     url(r'^test/ajax/$', 'admin.home.ajax_page'),
     url(r'^test/ajax_data/$', 'admin.home.ajax_data'),
+    url(r'^test/modals/$', 'admin.home.modals'),
 )

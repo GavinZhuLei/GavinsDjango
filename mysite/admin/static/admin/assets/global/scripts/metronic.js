@@ -626,6 +626,7 @@ var Metronic = function() {
                 if (el.height() <= ($(window).height())) {
                     options.cenrerY = true;
                 }
+
                 el.block({
                     message: html,
                     baseZ: options.zIndex ? options.zIndex : 1000,
