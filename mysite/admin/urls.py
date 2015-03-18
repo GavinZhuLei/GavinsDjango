@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^home/test2$', 'admin.home.test2'),
     url(r'^login/test$','admin.login.test'),
     url(r'^test/ajax/$', 'admin.home.ajax_page'),
+    url(r'^test/ajax_data/$', 'admin.home.ajax_data'),
 )
