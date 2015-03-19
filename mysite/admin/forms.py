@@ -27,10 +27,11 @@ class UserForm(forms.Form):
     """
     用户管理--编辑
     """
+    id = forms.IntegerField(required=False)
     username = forms.CharField()
-    password = forms.CharField()
-    repassword = forms.CharField()
+    password = forms.CharField(required=False)
+    repassword = forms.CharField(required=False)
     nickname = forms.CharField(required=False)
     email = forms.EmailField()
     phone = forms.CharField()
-    is_active = forms.BooleanField()
+    is_active = forms.BooleanField(required=False)

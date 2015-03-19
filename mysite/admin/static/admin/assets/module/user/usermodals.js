@@ -44,15 +44,25 @@ var UserUIExtendedModals = function () {
             var $modal = $('#user-edit-modal');
 
             $('#j-adduser').on('click', function(){
-                console.log($modal)
               // create the backdrop and wait for next modal to be triggered
               $('body').modalmanager('loading');
 
               setTimeout(function(){
-                  $modal.load('/admin/user/edit/2/', '', function(){
+                  $modal.load('/admin/user/edit/0/', '', function(){
                   $modal.modal();
                 });
               }, 500);
+            });
+
+            $('#datatable_ajax').delegate('.btn-editable','click',function(){
+                console.log('this')
+                $('body').modalmanager('loading');
+                var editId = $(this).attr('data-id');
+                  setTimeout(function(){
+                      $modal.load('/admin/user/edit/'+editId+'/', '', function(){
+                      $modal.modal();
+                    });
+                  }, 500);
             });
 
             $modal.on('click', '.update', function(){

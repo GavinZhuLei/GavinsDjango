@@ -21,31 +21,22 @@ var UserFormValidation = function () {
                 rules: {
                     username: {
                         minlength: 2,
+                        maxlength: 50,
                         required: true
                     },
                     email: {
                         required: true,
                         email: true
                     },
-                    email: {
-                        required: true,
-                        email: true
+                    phone: {
+                        required: true
                     },
-                    url: {
-                        required: true,
-                        url: true
+                    password: {
+                        required: true
                     },
-                    number: {
+                    repassword: {
                         required: true,
-                        number: true
-                    },
-                    digits: {
-                        required: true,
-                        digits: true
-                    },
-                    creditcard: {
-                        required: true,
-                        creditcard: true
+                        equalTo: "#j_password"
                     },
                 },
 
@@ -80,19 +71,36 @@ var UserFormValidation = function () {
                     //success2.show();
                     //error2.hide();
 
+
                     $modal.modal('loading');
+                    console.log($(form).serializeArray())
 
-                    setTimeout(function(){
-                          $modal.load('/admin/user/update/', '', function(){
-                          $modal
-                          .modal('loading')
-                          .find('.modal-body')
-                            .prepend('<div class="alert alert-info fade in">' +
-                              'Updated!<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                            '</div>');
-                        });
-                      }, 1000);
+                    $.ajax({
+                        url:'/admin/user/update/',
+                        type:'post',
+                        data: $(form).serializeArray(),
+                        success:function(data){
+                            data = $.parseJSON(data);
+                            if(data.success){
+                                setTimeout(function(){
 
+                                      $modal.load('/admin/user/edit/'+data.pk+'/', '', function(){
+                                          error2.hide();
+                                          $modal.modal('loading')
+                                      .find('.modal-body')
+                                        .prepend('<div class="alert alert-info fade in">' +
+                                          'Updated!<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                                        '</div>');
+                                    });
+                                  }, 1000);
+                            }else{
+                                setTimeout(function(){
+                                      $modal.modal('loading');
+                                        error2.show();
+                                  }, 1000);
+                            }
+                        }
+                    });
                 }
             });
     }

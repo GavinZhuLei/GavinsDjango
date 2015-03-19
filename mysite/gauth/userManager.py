@@ -24,6 +24,16 @@ class UserManager(object):
         user.save()
         return True
 
+    def update(self, user):
+        try:
+            olduser = User.objects.get(pk=user.id)
+        except:
+            return False
+        else:
+            user.password = olduser.password
+            user.save()
+            return True
+
     def get_one(self, username):
         try:
             user = User.objects.get(Q(username=username))

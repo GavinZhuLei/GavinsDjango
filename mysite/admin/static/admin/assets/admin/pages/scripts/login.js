@@ -162,7 +162,8 @@ var Login = function() {
                     email: true
                 },
                 phone: {
-                    required: true
+                    required: true,
+                    phone:true
                 },
                 password: {
                     required: true
