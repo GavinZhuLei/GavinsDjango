@@ -21,3 +21,16 @@ class RegisterForm(forms.Form):
     repassword = forms.CharField()
     email = forms.EmailField()
     phone = forms.CharField()
+
+
+class UserForm(forms.Form):
+    """
+    用户管理--编辑
+    """
+    username = forms.CharField()
+    password = forms.CharField()
+    repassword = forms.CharField()
+    nickname = forms.CharField(required=False)
+    email = forms.EmailField()
+    phone = forms.CharField()
+    is_active = forms.BooleanField()

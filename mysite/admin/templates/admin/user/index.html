@@ -213,9 +213,9 @@
 				</div>
 			</div>
 
-            <div id="user-edit-modal" class="modal fade" data-backdrop="static" data-attention-animation="false" tabindex="-1">
+            <div id="user-edit-modal" class="modal fade  in" style="width:600px;" data-backdrop="static" data-attention-animation="false" tabindex="-1">
 
-            </div>
+            </div></div>
 {% endblock %}
 {% block pagescript %}
 <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -230,6 +230,7 @@
 <script src="/static/admin/assets/global/scripts/datatable.js"></script>
 <script src="/static/admin/assets/module/user/user.js"></script>
     <script src="/static/admin/assets/module/user/usermodals.js"></script>
+
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
     jQuery(document).ready(function() {
@@ -237,4 +238,5 @@
             UserUIExtendedModals.init();
         });
 </script>
+
 {% endblock %}

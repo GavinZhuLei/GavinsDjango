@@ -49,22 +49,18 @@ var UserUIExtendedModals = function () {
               $('body').modalmanager('loading');
 
               setTimeout(function(){
-                  $modal.load('/admin/user/edit/', '', function(){
+                  $modal.load('/admin/user/edit/2/', '', function(){
                   $modal.modal();
                 });
               }, 500);
             });
 
             $modal.on('click', '.update', function(){
-              $modal.modal('loading');
-              setTimeout(function(){
-                $modal
-                  .modal('loading')
-                  .find('.modal-body')
-                    .prepend('<div class="alert alert-info fade in">' +
-                      'Updated!<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                    '</div>');
-              }, 1000);
+
+                $('#form_sample_2').submit();
+
+
+
             });
         }
 

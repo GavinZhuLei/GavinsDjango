@@ -11,7 +11,17 @@ def index(request):
     return render_to_response('admin/user/index.html',{})
 
 
-def edit(request):
+def edit(request, user_id):
+    if user_id != 0:
+        usermanager = UserManager()
+        user = usermanager.get_bypk(user_id)
+
+        return render_to_response('admin/user/edit.html',{'user_id':user_id,'user':user})
+
+    return render_to_response('admin/user/edit.html',{'user_id':user_id})
+
+
+def update(request):
     return render_to_response('admin/user/edit.html',{})
 
 
@@ -22,6 +32,7 @@ def users_data(request):
     res= _load_data(users,draw)
 
     return HttpResponse(json.dumps(res, cls=MyJSONEncoder))
+
 
 def _load_data(users, draw):
     res = {}
@@ -40,7 +51,7 @@ def _load_data(users, draw):
         row.append(user.create_time)
         row.append(user.last_login_time)
         row.append('<span class="label label-sm label-success">正常</span>')
-        row.append('<a href="javascript:;" class="btn btn-xs default btn-editable"><i class="fa fa-pencil"></i> Edit</a>')
+        row.append('<a href="javascript:;" data-id="'+str(user.pk)+'" class="btn btn-xs default btn-editable"><i class="fa fa-pencil"></i> 编辑</a>')
 
         res['data'].append(row)
 

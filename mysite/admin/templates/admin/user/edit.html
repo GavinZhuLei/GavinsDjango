@@ -3,34 +3,144 @@
 	<h4 class="modal-title">Ajax Content</h4>
 </div>
 <div class="modal-body">
-	<div class="row">
-		<div class="col-md-12">
-			<h4>Some Input</h4>
-			<p>
-				<input type="text" class="col-md-12 form-control">
-			</p>
-			<p>
-				<input type="text" class="col-md-12 form-control">
-			</p>
-			<p>
-				<input type="text" class="col-md-12 form-control">
-			</p>
-			<p>
-				<input type="text" class="col-md-12 form-control">
-			</p>
-			<p>
-				<input type="text" class="col-md-12 form-control">
-			</p>
-			<p>
-				<input type="text" class="col-md-12 form-control">
-			</p>
-			<p>
-				<input type="text" class="col-md-12 form-control">
-			</p>
-		</div>
-	</div>
+	<form action="/admin/user/edit/" id="form_sample_2" class="form-horizontal" >
+        <div class="form-body">
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                You have some form errors. Please check below.
+            </div>
+            <div class="alert alert-success display-hide">
+                <button class="close" data-close="alert"></button>
+                Your form validation is successful!
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">用户名 <span class="required">
+                * </span>
+                </label>
+                <div class="col-md-9">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        {% if user_id == 0 %}
+                            <input type="text" class="form-control" name="username"/>
+                        {% else %}
+                            <input type="text" class="form-control" name="username" value="{{ user.username }}"/>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">昵称 <span class="required">   &nbsp;&nbsp;</span>
+                </label>
+                <div class="col-md-9">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        {% if user_id == 0 %}
+                            <input type="text" class="form-control" name="nickname"/>
+                        {% else %}
+                            <input type="text" class="form-control" name="nickname" value="{{ user.nickname }}"/>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">邮箱 <span class="required">
+                * </span>
+                </label>
+                <div class="col-md-9">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        {% if user_id == 0 %}
+                            <input type="text" class="form-control" name="email"/>
+                        {% else %}
+                            <input type="text" class="form-control" name="email" value="{{ user.email }}"/>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">电话 <span class="required">
+                * </span>
+                </label>
+                <div class="col-md-9">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        {% if user_id == 0 %}
+                            <input type="text" class="form-control" name="phone"/>
+                        {% else %}
+                            <input type="text" class="form-control" name="phone" value="{{ user.phone }}"/>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+            {% if user_id == 0 %}
+            {% else %}
+            {% endif %}
+
+            <div class="form-group">
+                <label class="control-label col-md-3">URL <span class="required">
+                * </span>
+                </label>
+                <div class="col-md-9">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <input type="text" class="form-control" name="url"/>
+                    </div>
+                    <span class="help-block">
+                    e.g: http://www.demo.com or http://demo.com </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Number <span class="required">
+                * </span>
+                </label>
+                <div class="col-md-9">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <input type="text" class="form-control" name="number"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Digits <span class="required">
+                * </span>
+                </label>
+                <div class="col-md-9">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <input type="text" class="form-control" name="digits"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Credit Card <span class="required">
+                * </span>
+                </label>
+                <div class="col-md-9">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <input type="text" class="form-control" name="creditcard"/>
+                    </div>
+                    <span class="help-block">
+                    e.g: 5500 0000 0000 0004 </span>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 <div class="modal-footer">
 	<button type="button" class="btn default" data-dismiss="modal">Close</button>
-	<button type="button" class="btn blue">Save changes</button>
+	<button type="button" class="btn blue update">Save changes</button>
 </div>
+<script type="text/javascript" src="/static/admin/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/admin/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+<script src="/static/admin/assets/module/user/uservalidation.js"></script>
+<script>
+    jQuery(document).ready(function() {
+            UserFormValidation.init();
+        });
+</script>
