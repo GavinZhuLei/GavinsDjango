@@ -43,7 +43,8 @@ var Datatable = function() {
                 dataTable: {
                     "dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r><'table-scrollable't><'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>", // datatable layout
                     "pageLength": 10, // default records per page
-                    "language": { // language settings
+                    "language": {
+                    // language settings
                         // metronic spesific
                         "metronicGroupActions": "_TOTAL_ 条记录被选中：  ",
                         "metronicAjaxRequestGeneralError": "无法完成您的请求，请检查您的网络连接",
@@ -81,7 +82,7 @@ var Datatable = function() {
                         "timeout": 20000,
                         "data": function(data) { // add request parameters before submit
                             console.log(data)
-
+                            console.log(ajaxParams)
                             $.each(ajaxParams, function(key, value) {
                                 data[key] = value;
                             });

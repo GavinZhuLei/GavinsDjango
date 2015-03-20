@@ -40,12 +40,15 @@ var UserTableAjax = function () {
                 "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
 
                 "lengthMenu": [
-                    [10, 20, 50, 100, 150, -1],
-                    [10, 20, 50, 100, 150, "All"] // change per page values here
+                    [1,2, 10, 20, 50, 100, 150, -1],
+                    [1,2, 10, 20, 50, 100, 150, "All"] // change per page values here
                 ],
-                "pageLength": 10, // default record count per page
+                "pageLength": 1, // default record count per page
                 "ajax": {
                     "url": "/admin/user/data/", // ajax source
+                    //"data":function(){
+                    //
+                    //}
                 },
                 "order": [
                     [1, "asc"]

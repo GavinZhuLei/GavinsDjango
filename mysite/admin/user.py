@@ -64,27 +64,28 @@ def users_data(request):
 
 
 def _load_data(users, draw):
+    ulen = len(users)
     res = {}
     res['draw'] = draw
     res['data'] = []
-    res['recordsFiltered'],res['recordsTotal'] = len(users),len(users)
-    for user in users:
+    res['recordsFiltered'],res['recordsTotal'] = ulen,ulen
+    for i in range(ulen):
         row = []
-        row.append('<input type="checkbox" name="id[]" value="'+str(user.pk)+'">')
-        row.append('1')
-        row.append(user.username)
-        row.append(user.password)
-        row.append(user.nickname)
-        row.append(user.email)
-        row.append(user.phone)
-        row.append(user.create_time)
-        row.append(user.last_login_time)
-        if user.is_active:
+        row.append('<input type="checkbox" name="id" value="'+str(users[i].pk)+'">')
+        row.append(i+1)
+        row.append(users[i].username)
+        row.append(users[i].password)
+        row.append(users[i].nickname)
+        row.append(users[i].email)
+        row.append(users[i].phone)
+        row.append(users[i].create_time)
+        row.append(users[i].last_login_time)
+        if users[i].is_active:
             row.append('<span class="label label-sm label-success">正常</span>')
         else:
             row.append('<span class="label label-sm label-default">禁用</span>')
 
-        row.append('<a href="javascript:;" data-id="'+str(user.pk)+'" class="btn btn-xs default btn-editable"><i class="fa fa-pencil"></i> 编辑</a>')
+        row.append('<a href="javascript:;" data-id="'+str(users[i].pk)+'" class="btn btn-xs default btn-editable"><i class="fa fa-pencil"></i> 编辑</a>')
 
         res['data'].append(row)
 
