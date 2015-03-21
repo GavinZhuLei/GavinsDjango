@@ -35,3 +35,12 @@ class UserForm(forms.Form):
     email = forms.EmailField()
     phone = forms.CharField()
     is_active = forms.BooleanField(required=False)
+
+
+class PageForm(forms.Form):
+    """
+    分页获取数据
+    """
+    draw = forms.IntegerField()
+    length = forms.IntegerField()
+    start = forms.IntegerField()

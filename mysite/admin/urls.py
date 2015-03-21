@@ -16,6 +16,8 @@ urlpatterns = patterns('',
     url(r'^user/data/$', 'admin.user.users_data'),
     url(r'^user/edit/(?P<user_id>\d+)/$', 'admin.user.edit'),
     url(r'^user/update/$','admin.user.update'),
+    url(r'^user/disable/(?P<user_id>\d+)/$', 'admin.user.update_user_disable'),
+    url(r'^user/enable/(?P<user_id>\d+)/$', 'admin.user.update_user_enable'),
 
     url(r'^home/test$', 'admin.home.test'),
     url(r'^home/test1$', 'admin.home.test1'),

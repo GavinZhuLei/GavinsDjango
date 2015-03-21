@@ -14,6 +14,18 @@ class UserManager(object):
     def get_all(self):
         return User.objects.all()
 
+    def get(self, start, length):
+        """
+        分页获取用户数据
+        :param start:开始位置
+        :param length:获取数据条数
+        :return:
+        """
+        return User.objects.all()[start : (start + length)]
+
+    def get_count(self):
+        return User.objects.count()
+
     def add(self, user):
         # 检查用户名是否存在
         if User.objects.filter(Q(username=user.username)).count() > 0:
@@ -31,6 +43,22 @@ class UserManager(object):
             return False
         else:
             user.password = olduser.password
+            user.save()
+            return True
+
+    def update_is_active(self, pk, is_active):
+        """
+        更新用户状态
+        :param pk:
+        :param is_active:
+        :return:
+        """
+        try:
+            user = User.objects.get(pk = pk)
+        except:
+            return False
+        else:
+            user.is_active = is_active
             user.save()
             return True
 

@@ -123,7 +123,6 @@ var Datatable = function() {
                             }
 
                             Metronic.unblockUI(tableContainer);
-
                             return res.data;
                         },
                         "error": function() { // handle general connection errors

@@ -54,21 +54,51 @@ def update(request):
     return HttpResponse(json.dumps(res, cls=MyJSONEncoder))
 
 
-def users_data(request):
+def update_user_disable(request, user_id):
+    return _update_state(int(user_id),False)
+
+
+def update_user_enable(request, user_id):
+    return _update_state(int(user_id),True)
+
+
+def _update_state(pk, is_active):
     usermanager = UserManager()
-    users = usermanager.get_all
-    draw = request.POST['draw']
-    res= _load_data(users,draw)
+    if usermanager.update_is_active(pk, is_active):
+        res = {'success':True}
+    else:
+        res = {'success':False}
 
     return HttpResponse(json.dumps(res, cls=MyJSONEncoder))
 
 
-def _load_data(users, draw):
+def users_data(request):
+    from forms import PageForm
+    pagef = PageForm(request.POST)
+    if pagef.is_valid():
+        start = pagef.cleaned_data['start']
+        length = pagef.cleaned_data['length']
+        draw = pagef.cleaned_data['draw']
+
+        usermanager = UserManager()
+        users = usermanager.get(start, length)
+        count = usermanager.get_count()
+    else:
+        users = None
+        draw = 0
+        count = 0
+
+    res= _load_data(users,draw,count)
+
+    return HttpResponse(json.dumps(res, cls=MyJSONEncoder))
+
+
+def _load_data(users, draw, count):
     ulen = len(users)
     res = {}
     res['draw'] = draw
     res['data'] = []
-    res['recordsFiltered'],res['recordsTotal'] = ulen,ulen
+    res['recordsFiltered'],res['recordsTotal'] = count,count
     for i in range(ulen):
         row = []
         row.append('<input type="checkbox" name="id" value="'+str(users[i].pk)+'">')
@@ -85,7 +115,13 @@ def _load_data(users, draw):
         else:
             row.append('<span class="label label-sm label-default">禁用</span>')
 
-        row.append('<a href="javascript:;" data-id="'+str(users[i].pk)+'" class="btn btn-xs default btn-editable"><i class="fa fa-pencil"></i> 编辑</a>')
+        action = '<a href="javascript:;" data-id="'+str(users[i].pk)+'" class="btn btn-xs default btn-editable"><i class="fa fa-pencil"></i> 编辑</a>'
+        if users[i].is_active:
+            action += '&nbsp;&nbsp;<a href="javascript:;" data-toggle="confirmation" data-id="'+str(users[i].pk)+'" class="btn btn-xs default btn-disable"><i class="fa  fa-lock"></i>禁用</a>'
+        else:
+            action += '&nbsp;&nbsp;<a href="javascript:;" data-toggle="confirmation" data-id="'+str(users[i].pk)+'" class="btn btn-xs default btn-enable"><i class="fa fa-unlock-alt"></i>启用</a>'
+
+        row.append(action)
 
         res['data'].append(row)
 
