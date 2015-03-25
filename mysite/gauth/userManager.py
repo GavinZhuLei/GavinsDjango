@@ -4,8 +4,6 @@ from models import User
 from django.db.models import Q
 import common
 
-from django.contrib.auth import authenticate
-
 class UserManager(object):
     def __init__(self):
         pass
