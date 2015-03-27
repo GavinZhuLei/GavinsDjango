@@ -1,7 +1,7 @@
 /**
- * Created by 磊 on 2015/3/18.
+ * Created by Gavin on 2015/3/27.
  */
-var UserTableAjax = function () {
+var GroupTableAjax = function () {
 
     var initPickers = function () {
         //init date pickers
@@ -45,7 +45,7 @@ var UserTableAjax = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "/admin/user/data/", // ajax source
+                    "url": "/admin/group/data/", // ajax source
                     //"data":function(){
                     //
                     //}

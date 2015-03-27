@@ -86,3 +86,16 @@ class UserManager(object):
             if common.md5(password) == user.password:
                 return user
         return None
+
+    def get_groups(self, userpk):
+        """
+        获取用户所在的用户组
+        :param userpk:
+        :return:
+        """
+        try:
+            user = User.objects.get(pk = userpk)
+        except:
+            return None
+        else:
+            return user.group_set

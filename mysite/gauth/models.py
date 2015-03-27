@@ -39,6 +39,19 @@ class Permission(models.Model):
         return self.name
 
 
+class Menu(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=255)
+    parent_menu = models.IntegerField()
+    url = models.CharField(max_length=255)
+    sort = models.IntegerField()
+    is_leaft = models.BooleanField()
+    is_available = models.BooleanField()
+
+    def __unicode__(self):
+        return self.name
+
+
 class Group(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=255)
@@ -46,6 +59,8 @@ class Group(models.Model):
     create_time = models.DateTimeField(default=datetime.datetime.now())
     users = models.ManyToManyField(User)
     permission = models.ManyToManyField(Permission)
+    menu = models.ManyToManyField(Menu)
+    is_available = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.name

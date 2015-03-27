@@ -52,9 +52,9 @@ var Datatable = function() {
                         // data tables spesific
                         "lengthMenu": "<span class='seperator'>|</span>每页 _MENU_ 条",
                         "info": "<span class='seperator'>|</span>共 _TOTAL_ 条记录",
-                        "infoEmpty": "No records found to show",
-                        "emptyTable": "No data available in table",
-                        "zeroRecords": "No matching records found",
+                        "infoEmpty": "没有找到记录",
+                        "emptyTable": "没有可用的记录",
+                        "zeroRecords": "没有找到匹配的记录",
                         "paginate": {
                             "previous": "Prev",
                             "next": "Next",

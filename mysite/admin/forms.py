@@ -44,3 +44,12 @@ class PageForm(forms.Form):
     draw = forms.IntegerField()
     length = forms.IntegerField()
     start = forms.IntegerField()
+
+
+class GroupForm(forms.Form):
+    """
+    用户组
+    """
+    id = forms.IntegerField(required=False)
+    name = forms.CharField()
+    description = forms.CharField(required=False)

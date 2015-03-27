@@ -19,6 +19,11 @@ urlpatterns = patterns('',
     url(r'^user/disable/(?P<user_id>\d+)/$', 'admin.user.update_user_disable'),
     url(r'^user/enable/(?P<user_id>\d+)/$', 'admin.user.update_user_enable'),
 
+    # group
+    url(r'^group/index/$', 'admin.group.index'),
+    url(r'^group/data/$', 'admin.group.group_data'),
+    url(r'^group/edit/(?P<group_id>\d+)/$', 'admin.group.edit'),
+
     url(r'^home/test$', 'admin.home.test'),
     url(r'^home/test1$', 'admin.home.test1'),
     url(r'^home/test2$', 'admin.home.test2'),
