@@ -86,81 +86,13 @@ var GroupTableAjax = function () {
             }
         });
 
-        var $modal = $('#user-edit-modal');
+        var $modal = $('#group-edit-modal');
 
         $('body').delegate($modal,'hide.bs.modal',function(e){
             grid.getDataTable().ajax.reload();
         })
 
-        $('#datatable_ajax').delegate('.btn-disable','click',function(e) {
-            Metronic.blockUI({
-                                message: 'Loading...',
-                                target: $('#datatable_ajax'),
-                                overlayColor: 'none',
-                                cenrerY: true,
-                                boxed: true
-                            });
 
-            console.log('disable')
-            var pk = $(this).attr('data-id');
-            console.log(pk)
-            //grid.getDataTable().ajax.reload();
-
-            $thisSateTd = $(this).parent().prev();
-
-            $thisAction = $(this);
-
-            $.ajax({
-                url:'/admin/user/disable/'+pk+'/',
-                type:'POST',
-                success:function(data){
-                    Metronic.unblockUI($('#datatable_ajax'));
-                    data = $.parseJSON(data);
-                    if(data.success){
-                        //禁用成功
-                        $thisSateTd.html('<span class="label label-sm label-default">禁用</span>');
-                        $thisAction.removeClass('btn-disable').addClass('btn-enable').html('<i class="fa fa-unlock-alt"></i>启用');
-                    }else{
-                        alert('fail')
-                    }
-                }
-            })
-        });
-
-        $('#datatable_ajax').delegate('.btn-enable','click',function(e) {
-            Metronic.blockUI({
-                                message: 'Loading...',
-                                target: $('#datatable_ajax'),
-                                overlayColor: 'none',
-                                cenrerY: true,
-                                boxed: true
-                            });
-
-            console.log('enable')
-            var pk = $(this).attr('data-id');
-            console.log(pk)
-            //grid.getDataTable().ajax.reload();
-
-            $thisSateTd = $(this).parent().prev();
-
-            $thisAction = $(this);
-
-            $.ajax({
-                url:'/admin/user/enable/'+pk+'/',
-                type:'POST',
-                success:function(data){
-                    Metronic.unblockUI($('#datatable_ajax'));
-                    data = $.parseJSON(data);
-                    if(data.success){
-                        //禁用成功
-                        $thisSateTd.html('<span class="label label-sm label-success">正常</span>');
-                        $thisAction.removeClass('btn-enable').addClass('btn-disable').html('<i class="fa  fa-lock"></i>禁用');
-                    }else{
-                        alert('fail')
-                    }
-                }
-            })
-        });
     }
 
 

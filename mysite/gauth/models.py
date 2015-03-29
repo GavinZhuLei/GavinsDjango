@@ -45,8 +45,8 @@ class Menu(models.Model):
     parent_menu = models.IntegerField()
     url = models.CharField(max_length=255)
     sort = models.IntegerField()
-    is_leaft = models.BooleanField()
-    is_available = models.BooleanField()
+    is_leaft = models.BooleanField(default=False)
+    is_available = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.name

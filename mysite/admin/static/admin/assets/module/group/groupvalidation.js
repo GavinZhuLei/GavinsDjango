@@ -11,7 +11,7 @@ var GroupFormValidation = function () {
             var form2 = $('#form_sample_2');
             var error2 = $('.alert-danger', form2);
             var success2 = $('.alert-success', form2);
-            var $modal = $('#user-edit-modal');
+            var $modal = $('#group-edit-modal');
 
             form2.validate({
                 errorElement: 'span', //default input error message container
@@ -19,25 +19,14 @@ var GroupFormValidation = function () {
                 focusInvalid: false, // do not focus the last invalid input
                 ignore: "",  // validate all fields including form hidden input
                 rules: {
-                    username: {
+                    name: {
                         minlength: 2,
                         maxlength: 50,
                         required: true
                     },
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    phone: {
-                        required: true
-                    },
-                    password: {
-                        required: true
-                    },
-                    repassword: {
-                        required: true,
-                        equalTo: "#j_password"
-                    },
+                    description:{
+                        maxlength: 225
+                    }
                 },
 
                 invalidHandler: function (event, validator) { //display error alert on form submit
@@ -76,7 +65,7 @@ var GroupFormValidation = function () {
                     console.log($(form).serializeArray())
 
                     $.ajax({
-                        url:'/admin/user/update/',
+                        url:'/admin/group/save/',
                         type:'post',
                         data: $(form).serializeArray(),
                         success:function(data){
@@ -84,7 +73,7 @@ var GroupFormValidation = function () {
                             if(data.success){
                                 setTimeout(function(){
 
-                                      $modal.load('/admin/user/edit/'+data.pk+'/', '', function(){
+                                      $modal.load('/admin/group/edit/'+data.pk+'/', '', function(){
                                           error2.hide();
                                           $modal.modal('loading')
                                       .find('.modal-body')

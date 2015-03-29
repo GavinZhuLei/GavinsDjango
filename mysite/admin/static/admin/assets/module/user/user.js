@@ -87,8 +87,11 @@ var UserTableAjax = function () {
         });
 
         var $modal = $('#user-edit-modal');
+        var $groupModal = $('#user-group-modal')
 
-        $('body').delegate($modal,'hide.bs.modal',function(e){
+
+
+        $('body').delegate('#user-edit-modal','hide.bs.modal',function(e){
             grid.getDataTable().ajax.reload();
         })
 

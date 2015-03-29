@@ -41,7 +41,7 @@ var GroupUIExtendedModals = function () {
             });
 
             //ajax demo:
-            var $modal = $('#user-edit-modal');
+            var $modal = $('#group-edit-modal');
 
             $('#j-addgroup').on('click', function(){
               // create the backdrop and wait for next modal to be triggered
@@ -59,7 +59,7 @@ var GroupUIExtendedModals = function () {
                 $('body').modalmanager('loading');
                 var editId = $(this).attr('data-id');
                   setTimeout(function(){
-                      $modal.load('/admin/user/edit/'+editId+'/', '', function(){
+                      $modal.load('/admin/group/edit/'+editId+'/', '', function(){
                       $modal.modal();
                     });
                   }, 500);

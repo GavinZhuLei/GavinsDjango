@@ -39,6 +39,39 @@ class GroupManager(object):
         group.save()
         return True
 
+    def get_one_name(self, name):
+        """
+        根据用户组名称获取用户组
+        :param name:
+        :return:
+        """
+        try:
+            group = Group.objects.get(Q(name=name))
+        except:
+            return None
+        else:
+            return group
+
+    def get_one_pk(self, pk):
+        """
+        根据用户组id获取用户组
+        :param pk:
+        :return:
+        """
+        try:
+            group = Group.objects.get(Q(pk=pk))
+        except:
+            return None
+        else:
+            return group
+
+    def get_available(self):
+        """
+        获取有效的用户组
+        :return:
+        """
+        return Group.objects.filter(Q(is_available=True))
+
     def update(self, group):
         """
         更新用户组
@@ -52,6 +85,7 @@ class GroupManager(object):
         except:
             return False
         else:
+            group.create_time = oldgroup.create_time
             group.save()
             return True
 

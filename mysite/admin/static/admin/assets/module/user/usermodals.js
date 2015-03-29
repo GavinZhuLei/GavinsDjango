@@ -42,6 +42,7 @@ var UserUIExtendedModals = function () {
 
             //ajax demo:
             var $modal = $('#user-edit-modal');
+            var $groupModal = $('#user-group-modal')
 
             $('#j-adduser').on('click', function(){
               // create the backdrop and wait for next modal to be triggered
@@ -65,12 +66,23 @@ var UserUIExtendedModals = function () {
                   }, 500);
             });
 
+            /**
+             * 选择用户组
+             */
+            $('#datatable_ajax').delegate('.btn-editgroup','click',function(){
+                $('body').modalmanager('loading');
+                var currentId = $(this).attr('data-id');
+                setTimeout(function(){
+                      $groupModal.load('/admin/user/group/'+currentId+'/', '', function(){
+                      $groupModal.modal();
+                    });
+                }, 500);
+            });
+
+
             $modal.on('click', '.update', function(){
 
                 $('#form_sample_2').submit();
-
-
-
             });
         }
 

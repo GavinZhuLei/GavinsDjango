@@ -2,7 +2,8 @@
 # __author__ = '磊'
 from django.shortcuts import render_to_response
 from gauth.userManager import UserManager
-from gauth.common import MyJSONEncoder
+from gauth.groupManager import GroupManager
+from gauth.common import MyJSONEncoder,convert_to_int_list
 from django.http import HttpResponse
 from gauth.models import User
 import json
@@ -20,6 +21,60 @@ def edit(request, user_id):
         return render_to_response('admin/user/edit.html',{'user_id':user_id,'user':user})
 
     return render_to_response('admin/user/edit.html',{'user_id':0})
+
+
+def select_group(request, user_id):
+    """
+    用户选择用户组
+    :param request:
+    :param user_id:
+    :return:
+    """
+    groupmanager = GroupManager()
+    usermanager = UserManager()
+    groups = groupmanager.get_available()
+    user_groups = usermanager.get_groups(user_id)
+
+    groups_str = ''
+    for group in groups:
+        groups_str += '{id:'+str(group.id)+',text:\"'+ group.name + '\"},'
+    user_groups_str = ''
+    for user_group in user_groups:
+        user_groups_str +=  str(user_group.pk) +','
+    return render_to_response('admin/user/select_group.html',
+                              {'user_id' : user_id, 'groups': groups_str, 'user_groups': user_groups_str[:-1]})
+
+
+def save_group(request, user_id, groups):
+    """
+    保存选择的用户组
+    :param request:
+    :param user_id:
+    :param groups:
+    :return:
+    """
+    if request.method == 'POST':
+        groupmanager = GroupManager()
+        usermanager = UserManager()
+        grouplist = convert_to_int_list(groups)
+        already_user_groups = usermanager.get_groups(int(user_id))
+        already_group_ids = []
+
+        # 找出需要与该用户取消关系的用户组，删除该关系
+        for already_group in already_user_groups:
+            already_group_ids.append(already_group.id)
+            if grouplist.count(already_group.id) < 1:
+                usermanager.remove_group(int(user_id), already_group)
+
+        # 找出需要添加的关系进行添加
+        for group_id in grouplist:
+            if already_group_ids.count(group_id) < 1:
+                usermanager.add_grop(int(user_id), group_id)
+
+        res = {'success': True}
+        return HttpResponse(json.dumps(res, cls=MyJSONEncoder))
+    else:
+        return HttpResponse('fail')
 
 
 def update(request):
@@ -115,7 +170,8 @@ def _load_data(users, draw, count):
         else:
             row.append('<span class="label label-sm label-default">禁用</span>')
 
-        action = '<a href="javascript:;" data-id="'+str(users[i].pk)+'" class="btn btn-xs default btn-editable"><i class="fa fa-pencil"></i> 编辑</a>'
+        action = '<a href="javascript:;" data-id="'+str(users[i].pk)+'" class="btn btn-xs default btn-editable"><i class="fa fa-edit"></i> 编辑</a>'
+        action += '&nbsp;&nbsp;<a href="javascript:;" data-id="'+str(users[i].pk)+'" class="btn btn-xs default btn-editgroup"><i class="fa fa-edit"></i> 用户组</a>'
         if users[i].is_active:
             action += '&nbsp;&nbsp;<a href="javascript:;" data-toggle="confirmation" data-id="'+str(users[i].pk)+'" class="btn btn-xs default btn-disable"><i class="fa  fa-lock"></i>禁用</a>'
         else:

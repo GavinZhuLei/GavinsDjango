@@ -1,0 +1,52 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">用户</h4>
+</div>
+<div class="modal-body">
+	<form method="post" id="form_sample_2" class="form-horizontal" >
+        <div class="form-body">
+            <input type="hidden" id="J_userid" value="{{ user_id }}" />
+            <div class="form-group">
+                <label class="control-label col-md-3">用户组</label>
+                <div class="col-md-9">
+                    <input type="hidden" id="J_selectgroups" class="form-control select2" value="{{ user_groups|safe }}">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn default" data-dismiss="modal">Close</button>
+	<button type="button" id="J_save" class="btn blue">Save changes</button>
+</div>
+<script>
+    jQuery(document).ready(function() {
+            Metronic.initAjax();
+
+            $("#J_selectgroups").select2({
+                tags: [{{ groups|safe }}]
+            });
+
+            var $groupModal = $('#user-group-modal')
+
+            $('#J_save').on('click', function(){
+                var values = $('#J_selectgroups').val();
+                var userid = $('#J_userid').val();
+                $groupModal.modal('loading');
+                setTimeout(function(){
+                    $.ajax({
+                        url : '/admin/user/group/save/'+userid+'/'+values+'/',
+                        type: 'post',
+                        success:function(data){
+                            data = $.parseJSON(data);
+                            if(data.success){
+
+                                $groupModal.modal('hide')
+                            }
+                        }
+                    })
+                },500);
+
+            });
+        });
+</script>

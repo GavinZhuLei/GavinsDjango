@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from gauth.common import MyJSONEncoder
 from gauth.groupManager import GroupManager
+from gauth.models import Group
 
 def index(request):
     return render_to_response('admin/group/index.html',{})
@@ -36,9 +37,48 @@ def group_data(request):
     return HttpResponse(json.dumps(res, cls=MyJSONEncoder))
 
 
+def save(request):
+    """
+    保存用户组信息
+    :param request:
+    :return:
+    """
+    from forms import GroupForm
+    groupf = GroupForm(request.POST)
+
+    if groupf.is_valid():
+        group = Group()
+        from datetime import datetime
+        group.create_time = datetime.now()
+        group.create_username = request.user.username
+        group.description = groupf.cleaned_data['description']
+        group.is_available = True
+        group.name = groupf.cleaned_data['name']
+        group.id = groupf.cleaned_data['id']
+
+        groupmanager = GroupManager()
+        if group.id is None or group.id == 0:
+            if groupmanager.add(group):
+                newgroup = groupmanager.get_one_name(group.name)
+                res = {'success':True,'pk':newgroup.id}
+            else:
+                res = {'success':False}
+        else:
+            if groupmanager.update(group):
+                res = {'success':True, 'pk':group.id}
+            else:
+                res = {'success':False}
+    else:
+        res = {'success':False,'message':groupf.errors}
+    return HttpResponse(json.dumps(res, cls=MyJSONEncoder))
+
+
 def edit(request, group_id):
     if int(group_id) != 0:
-        return render_to_response('admin/group/edit.html',{'group_id':0})
+        groupmanager = GroupManager()
+        group = groupmanager.get_one_pk(group_id)
+
+        return render_to_response('admin/group/edit.html',{'group_id':group_id, 'group':group})
     return render_to_response('admin/group/edit.html',{'group_id':0})
 
 
@@ -61,7 +101,7 @@ def _load_data(groups, draw, count):
         else:
             row.append('<span class="label label-sm label-default">无效</span>')
 
-        action = '<a href="javascript:;" data-id="'+str(groups[i].pk)+'" class="btn btn-xs default btn-editable"><i class="fa fa-pencil"></i> 编辑</a>'
+        action = '<a href="javascript:;" data-id="'+str(groups[i].pk)+'" class="btn btn-xs default btn-editable"><i class="fa fa-edit"></i> 编辑</a>'
 
         row.append(action)
 

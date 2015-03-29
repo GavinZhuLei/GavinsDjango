@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 # __author__ = 'Gavin'
-from models import User
+from models import User,Group
 from django.db.models import Q
 import common
 
@@ -41,6 +41,7 @@ class UserManager(object):
             return False
         else:
             user.password = olduser.password
+            user.create_time = olduser.create_time
             user.save()
             return True
 
@@ -94,8 +95,39 @@ class UserManager(object):
         :return:
         """
         try:
-            user = User.objects.get(pk = userpk)
+            user = User.objects.select_related().get(pk = userpk)
         except:
             return None
         else:
-            return user.group_set
+            return user.group_set.all()
+
+    def remove_group(self, userpk, group):
+        """
+        移除用户的用户组
+        :param userpk:
+        :param group:
+        :return:
+        """
+        try:
+            user = User.objects.select_related().get(pk = userpk)
+        except:
+            return False
+        else:
+            user.group_set.remove(group)
+            return True
+
+    def add_grop(self, userpk, group_id):
+        """
+        添加用户的用户组
+        :param userpk:
+        :param group_id:
+        :return:
+        """
+        try:
+            user = User.objects.select_related().get(pk = userpk)
+            group = Group.objects.get(pk = group_id)
+        except:
+            return False
+        else:
+            user.group_set.add(group)
+            return True

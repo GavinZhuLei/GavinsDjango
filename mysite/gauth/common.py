@@ -17,6 +17,10 @@ def md5(str):
     return m.hexdigest()
 
 
+def convert_to_int_list(text):
+    return [int(i) for i in text.split(',')]
+
+
 class MyJSONEncoder(json.JSONEncoder):
     """
     将对象转化成Json对象
@@ -31,11 +35,12 @@ class MyJSONEncoder(json.JSONEncoder):
 
         # See "Date Time String Format" in the ECMA-262 specification.
         if isinstance(o, datetime.datetime):
+            o = o + datetime.timedelta(hours=8)
             r = o.isoformat()
             if o.microsecond:
                 r = r[:23] + r[26:]
             if r.endswith('+00:00'):
-                r = r[:-6] + 'Z'
+                r = r[:10] + ' ' + r[11:-6]
             return r
         elif isinstance(o, datetime.date):
             return o.isoformat()
