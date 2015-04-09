@@ -41,6 +41,10 @@
                             data = $.parseJSON(data);
                             if(data.success){
 
+                                //更新列表框中的值
+                                console.log(data.groups)
+
+
                                 $groupModal.modal('hide')
                             }
                         }

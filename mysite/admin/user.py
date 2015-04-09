@@ -37,10 +37,10 @@ def select_group(request, user_id):
 
     groups_str = ''
     for group in groups:
-        groups_str += '{id:'+str(group.id)+',text:\"'+ group.name + '\"},'
+        groups_str += '{id:'+str(group.id)+',text:\"' + group.name + '\"},'
     user_groups_str = ''
     for user_group in user_groups:
-        user_groups_str +=  str(user_group.pk) +','
+        user_groups_str += str(user_group.pk) + ','
     return render_to_response('admin/user/select_group.html',
                               {'user_id' : user_id, 'groups': groups_str, 'user_groups': user_groups_str[:-1]})
 
@@ -71,7 +71,11 @@ def save_group(request, user_id, groups):
             if already_group_ids.count(group_id) < 1:
                 usermanager.add_grop(int(user_id), group_id)
 
-        res = {'success': True}
+        usermanager = UserManager()
+        user_groups = usermanager.get_groups(user_id)
+        user_groups_str = [g.name for g in user_groups]
+
+        res = {'success': True, 'groups': user_groups_str}
         return HttpResponse(json.dumps(res, cls=MyJSONEncoder))
     else:
         return HttpResponse('fail')
@@ -155,11 +159,14 @@ def _load_data(users, draw, count):
     res['data'] = []
     res['recordsFiltered'],res['recordsTotal'] = count,count
     for i in range(ulen):
+        usermanager = UserManager()
+        user_groups = usermanager.get_groups(users[i].pk)
+        user_groups_str = [g.name for g in user_groups]
         row = []
         row.append('<input type="checkbox" name="id" value="'+str(users[i].pk)+'">')
         row.append(i+1)
         row.append(users[i].username)
-        row.append(users[i].password)
+        row.append(user_groups_str)
         row.append(users[i].nickname)
         row.append(users[i].email)
         row.append(users[i].phone)

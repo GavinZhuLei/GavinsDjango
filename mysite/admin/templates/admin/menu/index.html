@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{% for menu in menus %}
+    {{ menu.groups }}
+    {% for group in menu.groups %}
+        {{ group }}
+    {% endfor %}
+{% endfor %}
+</body>
+</html>

@@ -27,6 +27,9 @@ urlpatterns = patterns('',
     url(r'^group/edit/(?P<group_id>\d+)/$', 'admin.group.edit'),
     url(r'^group/save/$', 'admin.group.save'),
 
+    # menu
+    url(r'^menu/index/$', 'admin.menu.index'),
+
     url(r'^home/test$', 'admin.home.test'),
     url(r'^home/test1$', 'admin.home.test1'),
     url(r'^home/test2$', 'admin.home.test2'),
@@ -34,4 +37,5 @@ urlpatterns = patterns('',
     url(r'^test/ajax/$', 'admin.home.ajax_page'),
     url(r'^test/ajax_data/$', 'admin.home.ajax_data'),
     url(r'^test/modals/$', 'admin.home.modals'),
+    url(r'menu/test/$', 'admin.menu.test')
 )

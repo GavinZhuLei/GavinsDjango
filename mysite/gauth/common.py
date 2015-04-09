@@ -9,6 +9,7 @@ from django.core.serializers.json import DjangoJSONEncoder, DateTimeAwareJSONEnc
 from django.db.models.query import QuerySet
 from django.db import models
 from django.utils.timezone import is_aware
+from django.forms.models import model_to_dict
 
 
 def md5(str):
